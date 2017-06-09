@@ -40,28 +40,44 @@ let store = createStore(setNewPassword, defaultAction);
 
 const newAction = actionCreator('newPassword');
 
-store.dispatch(newAction);
+
+console.log(store.getState());
 
 
 
 
-const App = () => (
-    <div>
-        <div className="appHeader">My form</div>
-        <form className="myForm">
-            <label className="myLabel">
-            Set current password
-                <input className="myInput" type="text" name="password"/>
-            </label>
-            <label className="myLabel">
-            Set new password
-                <input className="myInput" type="text" name="password"/>
-            </label>
-            {/*{ errors && (<div className="myFormErrors">{errors}</div>)}*/}
-            <button className="myButton">Change password</button>
-        </form>
-    </div>
-);
+const App = () => {
+
+    const clickHandler = (value) => {
+        console.log(value);
+        store.dispatch(newAction);
+        console.log(store.getState());
+    };
+
+    const value = 'myInput';
+
+    const onChange = () => {
+        console.log('data');
+    };
+
+    return (
+        <div  className="appHeader">
+            My form
+            <form className="myForm" onChange={onChange()}>
+                <label className="myLabel">
+                Set current password
+                    <input className="myInput" type="text" name="password"/>
+                </label>
+                <label className="myLabel">
+                Set new password
+                    <input className="myInput" type="text" name="newPassword"/>
+                </label>
+                {/*{ errors && (<div className="myFormErrors">{errors}</div>)}*/}
+                <button className="myButton" type="button" onClick={clickHandler(value)}>Change password</button>
+            </form>
+        </div>
+    )
+};
 
 // App.propTypes = {
 //     onChangeValue: PropTypes.func
